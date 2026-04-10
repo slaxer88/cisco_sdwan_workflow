@@ -58,11 +58,15 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan
+        id: plan
         env:
           SDWAN_URL: ${{ secrets.VMANAGE_URL }}
           SDWAN_USERNAME: ${{ secrets.VMANAGE_USERNAME }}
           SDWAN_PASSWORD: ${{ secrets.VMANAGE_PASSWORD }}
-        run: terraform plan -var-file=environments/lab/lab.tfvars -no-color -out=tfplan
+        run: |
+          terraform plan -var-file=environments/lab/lab.tfvars -no-color -out=tfplan 2>&1 | tee /tmp/plan.txt
+          SUMMARY=$(grep -E "^Plan:|^No changes" /tmp/plan.txt || echo "Plan completed")
+          echo "summary=$SUMMARY" >> "$GITHUB_OUTPUT"
 
       - name: Post Plan to PR
         if: always()
@@ -91,6 +95,25 @@ jobs:
               body: body
             });
 
+      - name: Notify Webex (Plan)
+        if: always()
+        env:
+          WEBEX_TOKEN: ${{ secrets.WEBEX_TOKEN }}
+          WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
+        run: |
+          STATUS="${{ steps.plan.outcome }}"
+          ICON=$( [ "$STATUS" = "success" ] && echo "📋" || echo "❌" )
+          curl -s -X POST "https://webexapis.com/v1/messages" \
+            -H "Authorization: Bearer $WEBEX_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$(cat <<EOF
+          {
+            "roomId": "$WEBEX_ROOM_ID",
+            "markdown": "$ICON **SD-WAN Terraform Plan**\n\n- **PR**: #${{ github.event.number }} by ${{ github.actor }}\n- **결과**: ${STATUS}\n- **요약**: ${{ steps.plan.outputs.summary }}\n- **시간**: $(date -u '+%Y-%m-%d %H:%M UTC')\n- **링크**: ${{ github.event.pull_request.html_url }}"
+          }
+          EOF
+          )"
+
   apply:
     name: Terraform Apply
     needs: validate
@@ -115,9 +138,33 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
+        id: apply
         if: ${{ vars.ENABLE_TF_APPLY == 'true' }}
         env:
           SDWAN_URL: ${{ secrets.VMANAGE_URL }}
           SDWAN_USERNAME: ${{ secrets.VMANAGE_USERNAME }}
           SDWAN_PASSWORD: ${{ secrets.VMANAGE_PASSWORD }}
-        run: terraform apply -var-file=environments/lab/lab.tfvars -auto-approve
+        run: |
+          terraform apply -var-file=environments/lab/lab.tfvars -auto-approve -no-color 2>&1 | tee /tmp/apply.txt
+          SUMMARY=$(grep -E "^Apply complete|^Error" /tmp/apply.txt | head -1 || echo "Apply completed")
+          echo "summary=$SUMMARY" >> "$GITHUB_OUTPUT"
+
+      - name: Notify Webex (Apply)
+        if: always() && steps.apply.outcome != 'skipped'
+        env:
+          WEBEX_TOKEN: ${{ secrets.WEBEX_TOKEN }}
+          WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
+        run: |
+          STATUS="${{ steps.apply.outcome }}"
+          ICON=$( [ "$STATUS" = "success" ] && echo "✅" || echo "🚨" )
+          COMMIT_MSG=$(git log -1 --format='%s' 2>/dev/null || echo "N/A")
+          curl -s -X POST "https://webexapis.com/v1/messages" \
+            -H "Authorization: Bearer $WEBEX_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$(cat <<EOF
+          {
+            "roomId": "$WEBEX_ROOM_ID",
+            "markdown": "$ICON **SD-WAN Terraform Apply**\n\n- **적용자**: ${{ github.actor }}\n- **결과**: ${STATUS}\n- **변경내용**: ${COMMIT_MSG}\n- **요약**: ${{ steps.apply.outputs.summary }}\n- **시간**: $(date -u '+%Y-%m-%d %H:%M UTC')\n- **커밋**: [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})"
+          }
+          EOF
+          )"

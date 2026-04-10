@@ -78,6 +78,7 @@ jobs:
         run: python -m pipeline.cli --config-dir configs deploy --dry-run
 
       - name: Deploy to vManage
+        id: deploy
         if: ${{ vars.ENABLE_DEPLOY == 'true' }}
         env:
           VMANAGE_URL: ${{ secrets.VMANAGE_URL }}
@@ -85,3 +86,23 @@ jobs:
           VMANAGE_PASSWORD: ${{ secrets.VMANAGE_PASSWORD }}
           VMANAGE_PORT: ${{ secrets.VMANAGE_PORT }}
         run: python -m pipeline.cli --config-dir configs deploy --auto-approve
+
+      - name: Notify Webex (Deploy)
+        if: always() && steps.deploy.outcome != 'skipped'
+        env:
+          WEBEX_TOKEN: ${{ secrets.WEBEX_TOKEN }}
+          WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
+        run: |
+          STATUS="${{ steps.deploy.outcome }}"
+          ICON=$( [ "$STATUS" = "success" ] && echo "✅" || echo "🚨" )
+          COMMIT_MSG=$(git log -1 --format='%s' 2>/dev/null || echo "N/A")
+          curl -s -X POST "https://webexapis.com/v1/messages" \
+            -H "Authorization: Bearer $WEBEX_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$(cat <<EOF
+          {
+            "roomId": "$WEBEX_ROOM_ID",
+            "markdown": "$ICON **SD-WAN Python Deploy**\n\n- **적용자**: ${{ github.actor }}\n- **결과**: ${STATUS}\n- **변경내용**: ${COMMIT_MSG}\n- **시간**: $(date -u '+%Y-%m-%d %H:%M UTC')\n- **커밋**: [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})"
+          }
+          EOF
+          )"
