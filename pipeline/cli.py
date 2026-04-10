@@ -11,6 +11,7 @@ from rich.console import Console
 from pipeline.validate import run_validation
 from pipeline.plan import run_plan_local, run_plan_remote
 from pipeline.deploy import run_deploy, run_deploy_dry
+from pipeline.export import run_export
 
 console = Console()
 
@@ -115,6 +116,14 @@ def cmd_status(args):
         console.print(table)
 
 
+def cmd_export(args):
+    console.print("[bold]Stage: EXPORT[/bold]\n")
+    output_dir = Path(args.output_dir)
+    client = get_vmanage_client()
+    with client:
+        run_export(client, output_dir, include_factory=args.include_factory)
+
+
 def main():
     load_dotenv()
 
@@ -136,12 +145,17 @@ def main():
 
     subparsers.add_parser("status", help="Show current vManage device status")
 
+    export_parser = subparsers.add_parser("export", help="Export current vManage config to YAML")
+    export_parser.add_argument("--output-dir", default="configs", help="Output directory for exported YAML")
+    export_parser.add_argument("--include-factory", action="store_true", help="Include factory default templates")
+
     args = parser.parse_args()
     commands = {
         "validate": cmd_validate,
         "plan": cmd_plan,
         "deploy": cmd_deploy,
         "status": cmd_status,
+        "export": cmd_export,
     }
     commands[args.command](args)
 
