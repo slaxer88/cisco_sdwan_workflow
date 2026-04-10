@@ -1,0 +1,87 @@
+name: SD-WAN CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+    paths: ['configs/**']
+  pull_request:
+    branches: [main]
+    paths: ['configs/**']
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+  validate:
+    name: Validate Configs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Lint YAML
+        run: python -m pipeline.validate configs
+
+      - name: Run unit tests
+        run: pytest tests/ -v
+
+  plan:
+    name: Plan Changes
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Generate plan (local)
+        run: python -m pipeline.cli --config-dir configs plan --local
+
+      - name: Generate plan (remote)
+        if: ${{ vars.ENABLE_REMOTE_PLAN == 'true' }}
+        env:
+          VMANAGE_URL: ${{ secrets.VMANAGE_URL }}
+          VMANAGE_USERNAME: ${{ secrets.VMANAGE_USERNAME }}
+          VMANAGE_PASSWORD: ${{ secrets.VMANAGE_PASSWORD }}
+          VMANAGE_PORT: ${{ secrets.VMANAGE_PORT }}
+        run: python -m pipeline.cli --config-dir configs plan
+
+  deploy:
+    name: Deploy to vManage
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Deploy (dry-run)
+        run: python -m pipeline.cli --config-dir configs deploy --dry-run
+
+      - name: Deploy to vManage
+        if: ${{ vars.ENABLE_DEPLOY == 'true' }}
+        env:
+          VMANAGE_URL: ${{ secrets.VMANAGE_URL }}
+          VMANAGE_USERNAME: ${{ secrets.VMANAGE_USERNAME }}
+          VMANAGE_PASSWORD: ${{ secrets.VMANAGE_PASSWORD }}
+          VMANAGE_PORT: ${{ secrets.VMANAGE_PORT }}
+        run: python -m pipeline.cli --config-dir configs deploy --auto-approve
