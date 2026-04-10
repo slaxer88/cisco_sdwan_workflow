@@ -1,0 +1,64 @@
+centralized_policies:
+  - name: "STANDARD-TRAFFIC-POLICY"
+    description: "Standard traffic engineering policy for branches"
+    policy_type: "feature"
+    definition:
+      sequences:
+        - sequence_id: 1
+          sequence_name: "VOICE-TRAFFIC"
+          base_action: "accept"
+          match:
+            dscp: [46, 47]
+            source_vpn: [1]
+          actions:
+            sla_class:
+              name: "VOICE-SLA"
+              preferred_color: ["mpls"]
+              fallback: "biz-internet"
+
+        - sequence_id: 2
+          sequence_name: "BUSINESS-CRITICAL"
+          base_action: "accept"
+          match:
+            app_list: ["business-apps"]
+            source_vpn: [1]
+          actions:
+            sla_class:
+              name: "BUSINESS-SLA"
+              preferred_color: ["mpls", "biz-internet"]
+
+        - sequence_id: 3
+          sequence_name: "DEFAULT-TRAFFIC"
+          base_action: "accept"
+          match: {}
+          actions:
+            sla_class:
+              name: "BEST-EFFORT-SLA"
+
+policy_lists:
+  sla_classes:
+    - name: "VOICE-SLA"
+      latency: 150
+      loss: 1
+      jitter: 30
+
+    - name: "BUSINESS-SLA"
+      latency: 200
+      loss: 5
+      jitter: 100
+
+    - name: "BEST-EFFORT-SLA"
+      latency: 500
+      loss: 10
+      jitter: 200
+
+  app_lists:
+    - name: "business-apps"
+      apps:
+        - "salesforce"
+        - "office365"
+        - "box"
+
+  vpn_lists:
+    - name: "BRANCH-VPN"
+      vpn_ids: [1, 2]

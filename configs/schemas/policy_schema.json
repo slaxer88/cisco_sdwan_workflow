@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "centralized_policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "policy_type", "definition"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "policy_type": { "type": "string", "enum": ["feature", "cli"] },
+          "definition": {
+            "type": "object",
+            "properties": {
+              "sequences": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["sequence_id", "sequence_name", "base_action"],
+                  "properties": {
+                    "sequence_id": { "type": "integer" },
+                    "sequence_name": { "type": "string" },
+                    "base_action": { "type": "string", "enum": ["accept", "reject"] },
+                    "match": { "type": "object" },
+                    "actions": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "policy_lists": {
+      "type": "object",
+      "properties": {
+        "sla_classes": { "type": "array" },
+        "app_lists": { "type": "array" },
+        "vpn_lists": { "type": "array" }
+      }
+    }
+  }
+}

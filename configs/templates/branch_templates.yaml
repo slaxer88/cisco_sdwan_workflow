@@ -1,0 +1,52 @@
+feature_templates:
+  - name: "BRANCH-SYSTEM-TEMPLATE"
+    description: "Branch office system feature template"
+    template_type: "cisco_system"
+    device_type: ["vedge-C8000V"]
+    definition:
+      site_id: "{{site_id}}"
+      system_ip: "{{system_ip}}"
+      hostname: "{{hostname}}"
+      timezone: "Asia/Seoul"
+      console_baud_rate: "115200"
+      max_omp_sessions: 2
+
+  - name: "BRANCH-VPN0-TRANSPORT"
+    description: "Branch transport VPN template"
+    template_type: "cisco_vpn"
+    device_type: ["vedge-C8000V"]
+    definition:
+      vpn_id: 0
+      name: "Transport"
+
+  - name: "BRANCH-VPN0-INTERFACE"
+    description: "Branch transport interface template"
+    template_type: "cisco_vpn_interface"
+    device_type: ["vedge-C8000V"]
+    definition:
+      if_name: "{{transport_if_name}}"
+      ip_address: "{{transport_ip}}"
+      tunnel_interface:
+        color: "{{wan_color}}"
+        allow_service:
+          - dhcp
+          - dns
+          - icmp
+
+  - name: "BRANCH-VPN512-MGMT"
+    description: "Branch management VPN template"
+    template_type: "cisco_vpn"
+    device_type: ["vedge-C8000V"]
+    definition:
+      vpn_id: 512
+      name: "Management"
+
+device_templates:
+  - name: "BRANCH-DEVICE-TEMPLATE"
+    description: "Standard branch office device template"
+    device_type: "vedge-C8000V"
+    feature_templates:
+      - "BRANCH-SYSTEM-TEMPLATE"
+      - "BRANCH-VPN0-TRANSPORT"
+      - "BRANCH-VPN0-INTERFACE"
+      - "BRANCH-VPN512-MGMT"

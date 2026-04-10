@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["feature_templates"],
+  "properties": {
+    "feature_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "template_type", "device_type", "definition"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_-]+$"
+          },
+          "description": { "type": "string" },
+          "template_type": {
+            "type": "string",
+            "enum": [
+              "cisco_system", "cisco_vpn", "cisco_vpn_interface",
+              "cisco_banner", "cisco_ntp", "cisco_logging",
+              "cisco_bfd", "cisco_omp", "cisco_security",
+              "cisco_snmp", "cisco_aaa"
+            ]
+          },
+          "device_type": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "definition": { "type": "object" }
+        }
+      }
+    },
+    "device_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "device_type", "feature_templates"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "device_type": { "type": "string" },
+          "feature_templates": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

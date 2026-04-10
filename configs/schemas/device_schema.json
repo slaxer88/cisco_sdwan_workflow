@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["devices"],
+  "properties": {
+    "devices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["hostname", "device_id", "system_ip", "site_id", "device_template", "variables"],
+        "properties": {
+          "hostname": { "type": "string" },
+          "device_id": { "type": "string" },
+          "system_ip": { "type": "string", "format": "ipv4" },
+          "site_id": { "type": "string", "pattern": "^[0-9]+$" },
+          "device_template": { "type": "string" },
+          "variables": {
+            "type": "object",
+            "required": ["hostname", "system_ip", "site_id"],
+            "properties": {
+              "hostname": { "type": "string" },
+              "system_ip": { "type": "string" },
+              "site_id": { "type": "string" },
+              "transport_if_name": { "type": "string" },
+              "transport_ip": { "type": "string" },
+              "wan_color": {
+                "type": "string",
+                "enum": ["default", "mpls", "biz-internet", "public-internet", "lte", "3g", "metro-ethernet"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
