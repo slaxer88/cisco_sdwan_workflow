@@ -19,13 +19,17 @@ class VManageAuth:
         login_url = f"{self.base_url}/j_security_check"
         payload = {"j_username": self.username, "j_password": self.password}
 
-        resp = self.session.post(login_url, data=payload, timeout=30)
-        if resp.status_code != 200 or "html" in resp.text.lower():
-            raise ConnectionError(f"vManage login failed: {resp.status_code}")
+        resp = self.session.post(login_url, data=payload, timeout=30, allow_redirects=True)
+        if resp.status_code != 200:
+            raise ConnectionError(f"vManage login failed: HTTP {resp.status_code}")
+
+        cookies = self.session.cookies.get_dict()
+        if "JSESSIONID" not in cookies:
+            raise ConnectionError("vManage login failed: no session cookie (check credentials)")
 
         token_url = f"{self.base_url}/dataservice/client/token"
         token_resp = self.session.get(token_url, timeout=15)
-        if token_resp.status_code == 200:
+        if token_resp.status_code == 200 and len(token_resp.text.strip()) < 200:
             self.session.headers["X-XSRF-TOKEN"] = token_resp.text.strip()
 
     def logout(self) -> None:
