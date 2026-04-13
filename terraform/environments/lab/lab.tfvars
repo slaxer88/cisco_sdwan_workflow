@@ -1,6 +1,6 @@
 vmanage_url      = "https://10.70.131.199:43145"
 vmanage_username = "admin"
-vmanage_password = "CHANGE_ME"
+vmanage_password = "cisco!123"
 
 test_site_id         = 9999
 test_system_ip       = "10.255.99.1"

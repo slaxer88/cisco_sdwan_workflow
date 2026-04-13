@@ -1,0 +1,744 @@
+centralized_policies:
+- name: color_migration_testing
+  description: color_migration_testing
+  policy_id: 74c04952-130f-4d54-95f6-43b7eaed72cd
+  policy_type: feature
+  is_activated: true
+  definition:
+    assembly:
+    - definitionId: 3384cfe6-1c8c-4ae4-89be-3e0834a3ea5c
+      type: appRoute
+      entries:
+      - siteLists:
+        - f026adaa-e526-4219-8400-f8b61c19dc75
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: 9118912a-232c-4070-a313-e00cfca38aae
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - f026adaa-e526-4219-8400-f8b61c19dc75
+    - definitionId: a615b179-0b6b-43d4-a83b-bafec6627e04
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 36ad7305-717f-456b-879b-2d82790f170f
+    - definitionId: e9ed998d-0d0a-449d-97e5-cf861a23b63c
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 578c2709-aff1-40af-98b1-2326e02b9f2d
+    - definitionId: 9881fa4a-651a-4211-bf05-10cf488ee35a
+      type: appRoute
+      entries:
+      - siteLists:
+        - 578c2709-aff1-40af-98b1-2326e02b9f2d
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: e8ed20db-5092-4306-a555-0210ec1c4c19
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 933cb51c-216a-4736-8d8d-1370fcb77014
+    - definitionId: f021c472-4963-4f04-b680-e2f32836e912
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 45651e20-0b3e-435e-a61a-ed987418e134
+    - definitionId: b878f6d4-b3b4-4d7c-adf2-a062a099cf96
+      type: appRoute
+      entries:
+      - siteLists:
+        - 933cb51c-216a-4736-8d8d-1370fcb77014
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: 57b22b6b-8796-4f43-bbb8-504efd21743b
+      type: appRoute
+      entries:
+      - siteLists:
+        - 36ad7305-717f-456b-879b-2d82790f170f
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: 97bdb6be-b68c-4552-98a6-5209bddb6d28
+      type: appRoute
+      entries:
+      - siteLists:
+        - 45651e20-0b3e-435e-a61a-ed987418e134
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    regionRoleAssembly: []
+- name: color_migration_default
+  description: color_migration_default
+  policy_id: e498a530-afcc-4d51-b61e-bbfd2f8b36e8
+  policy_type: feature
+  is_activated: false
+  definition:
+    assembly:
+    - definitionId: 97bdb6be-b68c-4552-98a6-5209bddb6d28
+      type: appRoute
+      entries:
+      - siteLists:
+        - 45651e20-0b3e-435e-a61a-ed987418e134
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: 57b22b6b-8796-4f43-bbb8-504efd21743b
+      type: appRoute
+      entries:
+      - siteLists:
+        - 36ad7305-717f-456b-879b-2d82790f170f
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: b878f6d4-b3b4-4d7c-adf2-a062a099cf96
+      type: appRoute
+      entries:
+      - siteLists:
+        - 933cb51c-216a-4736-8d8d-1370fcb77014
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: f021c472-4963-4f04-b680-e2f32836e912
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 45651e20-0b3e-435e-a61a-ed987418e134
+    - definitionId: e8ed20db-5092-4306-a555-0210ec1c4c19
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 933cb51c-216a-4736-8d8d-1370fcb77014
+    - definitionId: 9881fa4a-651a-4211-bf05-10cf488ee35a
+      type: appRoute
+      entries:
+      - siteLists:
+        - 578c2709-aff1-40af-98b1-2326e02b9f2d
+        vpnLists:
+        - f31ae683-09a9-4547-b422-ee6b98f01d6d
+    - definitionId: e9ed998d-0d0a-449d-97e5-cf861a23b63c
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 578c2709-aff1-40af-98b1-2326e02b9f2d
+    - definitionId: a615b179-0b6b-43d4-a83b-bafec6627e04
+      type: control
+      entries:
+      - direction: out
+        siteLists:
+        - 36ad7305-717f-456b-879b-2d82790f170f
+    regionRoleAssembly: []
+policy_lists:
+  site:
+  - name: IDC-Sites_24-06-22
+    list_id: 18fe6bb2-6343-4724-a070-b99757e9984e
+    entries:
+    - siteId: 100-110
+    - siteId: '240'
+  - name: G-IDC-Site_22-09-23
+    list_id: 578c2709-aff1-40af-98b1-2326e02b9f2d
+    entries:
+    - siteId: '110'
+  - name: HJ-Site_23-03-17
+    list_id: 933cb51c-216a-4736-8d8d-1370fcb77014
+    entries:
+    - siteId: '121'
+  - name: P-IDC-Site_22-09-23
+    list_id: 45651e20-0b3e-435e-a61a-ed987418e134
+    entries:
+    - siteId: '100'
+  - name: KR-Sites_23-03-17
+    list_id: 77faa13a-adc4-44df-8054-abf3a9cf5e87
+    entries:
+    - siteId: 120-149
+  - name: KR-IDC-Sites_25-01-14
+    list_id: a49d81fa-dadf-4d87-ba83-668b4df07428
+    entries:
+    - siteId: 100-110
+  - name: HQ-Site_23-03-17
+    list_id: 36ad7305-717f-456b-879b-2d82790f170f
+    entries:
+    - siteId: '120'
+  - name: US-Sites_25-03-01
+    list_id: 50a8f0c5-1240-41fb-91e0-df5f40644de7
+    entries:
+    - siteId: 150-170
+  - name: WDC-Site_25-03-01
+    list_id: f026adaa-e526-4219-8400-f8b61c19dc75
+    entries:
+    - siteId: '170'
+  vpn:
+  - name: VPN1
+    list_id: f31ae683-09a9-4547-b422-ee6b98f01d6d
+    entries:
+    - vpn: '1'
+  prefix:
+  - name: _AnyIpv4PrefixList
+    list_id: 9f182019-8ac5-4d20-b4e1-0f7ea52b911f
+    entries:
+    - ipPrefix: 0.0.0.0/0
+      le: '32'
+  tloc:
+  - name: HQ_TO_KR-IDC_25-07-03
+    list_id: 0fcdfe3d-27eb-4e8b-b065-df74c17b856f
+    entries:
+    - tloc: 1.1.100.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.1
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: private3
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: private3
+      encap: gre
+      preference: '2000'
+  - name: HQ_TO_KR-IDC_25-07-03_default
+    list_id: 8077b630-9a4c-43bd-bd41-09a428bbadfd
+    entries:
+    - tloc: 1.1.100.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.1
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: private3
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: private3
+      encap: gre
+      preference: '2000'
+  - name: HJ_TO_KR-IDC_25-07-03_default
+    list_id: b263782b-bfd1-4e8c-9222-9405fe132d63
+    entries:
+    - tloc: 1.1.100.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.1
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: private3
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: private3
+      encap: gre
+      preference: '2000'
+  - name: HJ_TO_KR-IDC_25-07-03
+    list_id: 1b41b0a8-2c73-4195-9c11-8bf83cbc7d3f
+    entries:
+    - tloc: 1.1.100.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.1
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: private1
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: private3
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.2
+      color: private3
+      encap: gre
+      preference: '2000'
+  - name: WDC_TO_KR-IDC_25-03-01
+    list_id: bfa433f1-954e-4efa-8c92-4665fdeaec14
+    entries:
+    - tloc: 1.1.100.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: biz-internet
+      encap: ipsec
+      preference: '1000'
+    - tloc: 1.1.110.2
+      color: biz-internet
+      encap: ipsec
+      preference: '1000'
+  - name: US_TO_KR-IDC_25-01-14
+    list_id: a0a8be14-84c6-4835-b33c-b3ff37917c1d
+    entries:
+    - tloc: 1.1.100.1
+      color: mpls
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.100.1
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: mpls
+      encap: gre
+      preference: '2000'
+    - tloc: 1.1.100.2
+      color: biz-internet
+      encap: ipsec
+      preference: '2000'
+    - tloc: 1.1.110.1
+      color: mpls
+      encap: gre
+      preference: '1000'
+    - tloc: 1.1.110.1
+      color: biz-internet
+      encap: ipsec
+      preference: '1000'
+    - tloc: 1.1.110.2
+      color: mpls
+      encap: gre
+      preference: '1000'
+    - tloc: 1.1.110.2
+      color: biz-internet
+      encap: ipsec
+      preference: '1000'
+  sla:
+  - name: Cou_SLA_default
+    list_id: e0475c47-8a55-453e-94e9-42485a171dc8
+    entries:
+    - latency: '250'
+      loss: '10'
+      jitter: '100'
+  - name: Transactional-Data
+    list_id: 9a648fcf-edc3-4b17-a267-6861344f1d50
+    entries:
+    - jitter: '100'
+      latency: '50'
+      loss: '5'
+  - name: Business-Data
+    list_id: c9cb63b9-490b-4ab7-ba38-b524469c8fce
+    entries:
+    - jitter: '200'
+      latency: '350'
+      loss: '3'
+  - name: Bulk-Data
+    list_id: 6d32d215-7f1a-4571-a1dd-01fee32ebf9c
+    entries:
+    - jitter: '100'
+      latency: '300'
+      loss: '10'
+  - name: Business-Critical
+    list_id: 69c52b82-347d-4e42-b9e8-0fee30fd27f1
+    entries:
+    - jitter: '100'
+      latency: '250'
+      loss: '1'
+  - name: Voice-And-Video
+    list_id: 2497b70c-e4ac-48e0-90d0-bcae21afd91a
+    entries:
+    - jitter: '30'
+      latency: '45'
+      loss: '2'
+  - name: Realtime
+    list_id: 9135518c-9b5d-4979-83da-9630381d1aa8
+    entries:
+    - jitter: '30'
+      latency: '150'
+      loss: '1'
+  - name: Best-Effort
+    list_id: 7999dcb7-de2c-4d68-89de-8b48f13b9a17
+    entries:
+    - jitter: '500'
+      latency: '500'
+      loss: '5'
+  - name: HJ_SLA_23-03-13
+    list_id: 85744305-66e9-4879-b0e6-9e99547a544f
+    entries:
+    - latency: '250'
+      loss: '10'
+  - name: HQ_SLA_23-04-18
+    list_id: b93da81c-a015-4a7d-a9cc-d04588b4c8ec
+    entries:
+    - latency: '250'
+      loss: '10'
+  - name: G-IDC_SLA_22-09-23
+    list_id: 279bdd1a-7d27-42be-bca9-6d11ff43e1e3
+    entries:
+    - latency: '250'
+      loss: '10'
+  - name: WDC_SLA_25-03-01
+    list_id: 30aba59f-37ce-4cc2-aaa8-74396877da87
+    entries:
+    - latency: '250'
+      loss: '10'
+  - name: P-IDC_SLA_22-09-23
+    list_id: 017c88f0-1a75-4685-9992-4e0466c348f6
+    entries:
+    - latency: '250'
+      loss: '10'
+  app:
+  - name: box_net_apps
+    list_id: 8e57f512-a2e7-4f3e-b144-6f151d8f5a39
+    entries:
+    - app: box
+  - name: REAL_TIME_APPS
+    list_id: 39ec09c3-22d8-4580-98e0-f5b3f5eda1c3
+    entries:
+    - app: sip
+    - app: rtp
+    - app: skinny
+  - name: sugar_crm_apps
+    list_id: 812e265b-fff0-4774-a4e3-593dcca4c7a6
+    entries:
+    - app: sugarcrm
+  - name: Google_Apps
+    list_id: 281c7fb9-588f-4ded-872c-ad58a22bcfa2
+    entries:
+    - app: android-updates
+    - app: blogger
+    - app: chrome_update
+    - app: gcs
+    - app: gmail
+    - app: gmail_basic
+    - app: gmail_chat
+    - app: gmail_drive
+    - app: gmail_mobile
+    - app: google-services
+    - app: google-services-audio
+    - app: google-services-media
+    - app: google-services-video
+    - app: google-accounts
+    - app: google_accounts
+    - app: google_ads
+    - app: google_analytics
+    - app: google_appengine
+    - app: google_cache
+    - app: google_calendar
+    - app: google_code
+    - app: google_desktop
+    - app: google_docs
+    - app: google-docs
+    - app: google-downloads
+    - app: google_earth
+    - app: google-earth
+    - app: google_groups
+    - app: google_maps
+    - app: google_photos
+    - app: google_picasa
+    - app: picasa
+    - app: google-photos
+    - app: google-play
+    - app: google_plus
+    - app: google-plus
+    - app: google_safebrowsing
+    - app: google_skymap
+    - app: google_spaces
+    - app: google_tags
+    - app: google_toolbar
+    - app: google_translate
+    - app: google_trusted_store
+    - app: google_weblight
+    - app: googlebot
+    - app: gstatic
+    - app: gtalk
+    - app: gtalk-chat
+    - app: gtalk-ft
+    - app: gtalk-video
+    - app: gtalk-voip
+    - app: hangouts
+    - app: hangouts-audio
+    - app: hangouts-chat
+    - app: hangouts-file-transfer
+    - app: hangouts-media
+    - app: hangouts-video
+    - app: youtube
+    - app: youtube_hd
+  - name: APP_Scavengers
+    list_id: b2060e7a-0245-4e81-8426-784e950ad298
+    entries:
+    - app: apple-updates
+    - app: apple-services
+    - app: twitter
+    - app: instagram
+    - app: youtube
+    - app: amazon-instant-video
+  - name: zoho_crm_apps
+    list_id: 0ebed6a6-4196-4727-92fb-5f3b10eb1287
+    entries:
+    - app: zoho-services
+  - name: salesforce_apps
+    list_id: 7a76e7dc-1a08-4805-8fb8-c5e104d85c25
+    entries:
+    - app: salesforce
+  - name: concur_apps
+    list_id: 0aa7f9a7-b0d8-4533-b035-9013c311a682
+    entries:
+    - app: concur
+  - name: APP_BULK_DATA
+    list_id: 12cbb691-7f72-4292-8c01-24ce37301c67
+    entries:
+    - app: ftp
+    - app: ftp-data
+    - app: cisco-jabber-im
+    - app: netblt
+    - app: rsync
+  - name: dropbox_apps
+    list_id: b04ca8b9-9ab6-4524-91ff-7e5bec4c38ae
+    entries:
+    - app: dropbox
+  - name: intuit_apps
+    list_id: 956a79cc-a799-4298-9fb3-a5daf7eef5c5
+    entries:
+    - app: intuit
+  - name: office365_apps
+    list_id: 7e20c6e2-81ea-452c-afc8-4b9044f271bd
+    entries:
+    - app: ms-live-accounts
+    - app: ms-lync
+    - app: ms-lync-audio
+    - app: ms-lync-control
+    - app: ms-lync-video
+    - app: ms-office-365
+    - app: ms-office-web-apps
+    - app: ms-services
+    - app: ms-teams
+    - app: ms-teams-audio
+    - app: ms-teams-media
+    - app: ms-teams-video
+    - app: ms-update
+    - app: outlook-web-service
+    - app: share-point
+    - app: skydrive
+    - app: skype
+  - name: webex_apps
+    list_id: fc4b5131-ad35-4dfc-aaab-c2b539fc6c3d
+    entries:
+    - app: cisco-collab-audio
+    - app: cisco-collab-video
+    - app: cisco-collaboration
+    - app: cisco-collab-control
+    - app: cisco-spark
+    - app: cisco-spark-audio
+    - app: cisco-spark-media
+    - app: cisco-spark-video
+    - app: webex-app-sharing
+    - app: webex-audio
+    - app: webex-control
+    - app: webex-media
+    - app: webex-meeting
+    - app: webex-video
+  - name: amazon_aws_apps
+    list_id: b91f0910-bbbc-4055-a370-b69cde4defdf
+    entries:
+    - app: amazon
+    - app: amazon-web-services
+    - app: amazon-instant-video
+    - app: amazon-cloudfront
+    - app: amazon-ec2
+    - app: amazon-s3
+  - name: oracle_apps
+    list_id: d0d9444e-b82e-4ec7-92b1-259f1287c902
+    entries:
+    - app: oracle
+    - app: oracle-bi
+    - app: oracle-ebsuite-unsecured
+    - app: oracle-sqlnet
+    - app: oraclenames
+    - app: oraclenet8cman
+  - name: Microsoft_Apps
+    list_id: 67d763d8-1011-46b0-a2a2-ac22c4af163b
+    entries:
+    - app: bing
+    - app: hockeyapp
+    - app: live_hotmail
+    - app: lync
+    - app: lync_online
+    - app: ms-services
+    - app: ms_translator
+    - app: ms-office-365
+    - app: share-point
+    - app: skydrive
+    - app: skype
+    - app: windows_azure
+    - app: windows-azure
+    - app: windows_update
+    - app: windows_marketplace
+    - app: windowslive
+    - app: windowslivespace
+    - app: windowsmedia
+    - app: xbox
+    - app: xbox_music
+    - app: xbox_video
+    - app: xboxlive
+    - app: xboxlive_marketplace
+    - app: word_online
+    - app: powerpoint_online
+    - app: ms-lync
+    - app: ms-lync-audio
+    - app: ms-lync-control
+    - app: ms-lync-video
+    - app: ms-update
+    - app: outlook-web-service
+  - name: gotomeeting_apps
+    list_id: d70aa25b-5370-4c66-b05a-fa4fd17c8990
+    entries:
+    - app: citrix
+    - app: gotomeeting
+  - name: VIDEO_CONF
+    list_id: 8b05e94e-af79-4753-9476-3b709f96f223
+    entries:
+    - app: rtp
+  - name: zendesk_apps
+    list_id: 96f3c6c2-ee1a-4ca2-bf62-5ef0a50b8292
+    entries:
+    - app: zendesk
+  - name: WEB_TOOLS_APP
+    list_id: e5a23276-db80-4ca2-a77d-2dc6bf9ce17b
+    entries:
+    - app: http
+    - app: https
+    - app: sshell
+  color:
+  - name: Color_Biz_Internet_22-09-23
+    list_id: ac424235-c6a9-4851-bf15-6e40ace46927
+    entries:
+    - color: biz-internet
+  - name: Color_Private1_25-07-03
+    list_id: cb4f4150-961b-4b8d-86af-fec70ac6bdd1
+    entries:
+    - color: private1
+  - name: Color_Private2_25-07-03
+    list_id: d24f058d-37cf-484d-8fbd-1ccb9d576dcf
+    entries:
+    - color: private2
+  - name: Color_Private3_25-07-03
+    list_id: b0e0709e-054a-4eab-b19a-5262b4ea115e
+    entries:
+    - color: private3
+  - name: Color_Private4_25-07-03
+    list_id: f261d7d6-3242-49ec-9767-5d64be2de99e
+    entries:
+    - color: private4
+  - name: Color_Private5_25-07-03
+    list_id: d7d116a4-9148-459b-a0e2-e2b50950d5ee
+    entries:
+    - color: private5
+  - name: Color_Private6_25-07-03
+    list_id: 376d1a2b-992f-46c2-9f8a-c7e738080242
+    entries:
+    - color: private6
+  - name: Color_Public_internet_23-03-13
+    list_id: 8884910d-ad76-4f69-ac4c-3afca891dae5
+    entries:
+    - color: public-internet
+  dataprefixall:
+  - name: WDC-Net_25-03-01
+    list_id: 7c02f70d-46d1-49e7-a1ba-d4ba8ff154ab
+    entries:
+    - ipPrefix: 172.29.212.0/22
+  - name: HJ-Net_23-08-10
+    list_id: 5082c367-5f28-4cb3-b1c7-3cea4f480299
+    entries:
+    - ipPrefix: 172.19.0.0/17
+  - name: G-IDC-Net_24-06-22
+    list_id: cae1a8e9-5e29-4834-ac46-d96b0a17e9b8
+    entries:
+    - ipPrefix: 10.0.0.0/8
+    - ipPrefix: 172.16.0.0/13
+    - ipPrefix: 172.24.0.0/14
+    - ipPrefix: 172.28.0.0/16
+    - ipPrefix: 172.30.0.0/15
+    - ipPrefix: 192.168.0.0/16
+  - name: HQ-Net_23-06-09
+    list_id: 6f3027a5-9ef1-4812-b994-e39d8ee5e9af
+    entries:
+    - ipPrefix: 172.16.0.0/16
+    - ipPrefix: 172.17.0.0/16
+    - ipPrefix: 192.168.0.0/18
+    - ipPrefix: 192.168.64.0/18
+    - ipPrefix: 192.168.128.0/18
+    - ipPrefix: 192.168.192.0/18
+  - name: P-IDC-Net_24-06-22
+    list_id: 1720d81c-6da4-41da-8e31-82be1f34d7eb
+    entries:
+    - ipPrefix: 10.0.0.0/8
+    - ipPrefix: 172.16.0.0/13
+    - ipPrefix: 172.24.0.0/14
+    - ipPrefix: 172.28.0.0/16
+    - ipPrefix: 172.30.0.0/15
+    - ipPrefix: 192.168.0.0/16

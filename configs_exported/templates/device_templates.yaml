@@ -1,0 +1,326 @@
+device_templates:
+- name: HJ
+  description: HJ
+  device_type: vedge-C8000V
+  template_id: b0c6624d-d26b-49ad-a14c-46eba3176c18
+  devices_attached: 2
+  feature_templates:
+  - name: C8K_AAA_Global
+    type: cedge_aaa
+  - name: C8K_BFD_Global
+    type: cisco_bfd
+  - name: C8K_OMP_Global
+    type: cisco_omp
+  - name: C8K_Sec_Global
+    type: cisco_security
+  - name: C8K_Sys_Global
+    type: cisco_system
+    sub_templates:
+    - name: C8K_Log_Global
+      type: cisco_logging
+    - name: C8K_NTP_Global
+      type: cisco_ntp
+  - name: C8K_VPN0_HJ
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN0_IF_HJ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF2_HJ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF3_HJ
+      type: cisco_vpn_interface
+  - name: C8K_VPN512_Global
+    type: cisco_vpn
+  - name: C8K_VPN1_HJ
+    type: cisco_vpn
+  - name: Default_EQUINIX_C8000V_GLOBAL_CISCO_V01
+    type: cedge_global
+  - name: Factory_Default_Retail_Banner
+    type: cisco_banner
+  - name: C8K_CLI_HJ
+    type: cli-template
+- name: HQ
+  description: HQ
+  device_type: vedge-C8000V
+  template_id: fdb93072-a1c5-459e-85dc-7dee2ed6ecc6
+  devices_attached: 2
+  feature_templates:
+  - name: C8K_AAA_Global
+    type: cedge_aaa
+  - name: C8K_BFD_Global
+    type: cisco_bfd
+  - name: C8K_OMP_Global
+    type: cisco_omp
+  - name: C8K_Sec_Global
+    type: cisco_security
+  - name: C8K_Sys_Global
+    type: cisco_system
+    sub_templates:
+    - name: C8K_Log_Global
+      type: cisco_logging
+    - name: C8K_NTP_Global
+      type: cisco_ntp
+  - name: C8K_VPN0_HQ
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN0_IF_HQ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF2_HQ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF3_HQ
+      type: cisco_vpn_interface
+  - name: C8K_VPN512_Global
+    type: cisco_vpn
+  - name: C8K_VPN1_HQ
+    type: cisco_vpn
+  - name: Default_EQUINIX_C8000V_GLOBAL_CISCO_V01
+    type: cedge_global
+  - name: Factory_Default_Retail_Banner
+    type: cisco_banner
+  - name: C8K_CLI_HQ
+    type: cli-template
+- name: BNK
+  description: BNK
+  device_type: vedge-C8000V
+  template_id: 98deac76-d799-4ffc-bb44-d7e13cd77635
+  devices_attached: 2
+  feature_templates:
+  - name: C8K_AAA_Global
+    type: cedge_aaa
+  - name: C8K_BFD_Global
+    type: cisco_bfd
+  - name: C8K_OMP_Global
+    type: cisco_omp
+  - name: C8K_Sec_Global
+    type: cisco_security
+  - name: C8K_Sys_Global
+    type: cisco_system
+    sub_templates:
+    - name: C8K_Log_Global
+      type: cisco_logging
+    - name: C8K_NTP_Global
+      type: cisco_ntp
+  - name: C8K_VPN0_BNK
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN0_IF_BNK
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF2_BNK
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF3_BNK
+      type: cisco_vpn_interface
+  - name: Default_AWS_TGW_CSR_VPN512_V01
+    type: cisco_vpn
+  - name: Default_EQUINIX_C8000V_GLOBAL_CISCO_V01
+    type: cedge_global
+  - name: Factory_Default_Retail_Banner
+    type: cisco_banner
+  - name: C8K_CLI_Global
+    type: cli-template
+- name: vSmart
+  description: vSmart
+  device_type: vsmart
+  template_id: a71bb71d-b16e-4f3f-b26d-2c65ca65bc9d
+  devices_attached: 2
+  feature_templates:
+  - name: Factory_Default_AAA_Template
+    type: aaa
+  - name: vSmart_OMP_Global
+    type: omp-vsmart
+  - name: vSmart_Security_Global
+    type: security-vsmart
+  - name: vSmart_Sys_Global
+    type: system-vsmart
+    sub_templates:
+    - name: Factory_Default_Logging_Template_V01
+      type: logging
+    - name: vSmart_NTP_Global
+      type: ntp
+  - name: vSmart_VPN0_Global
+    type: vpn-vsmart
+    sub_templates:
+    - name: vSmart_VPN0_IF_Global
+      type: vpn-vsmart-interface
+  - name: Factory_Default_vSmart_vManage_VPN_512_Template
+    type: vpn-vsmart
+- name: BNK_default
+  description: BNK_default
+  device_type: vedge-C8000V
+  template_id: 4e51f8b4-5f22-42e7-9c5f-91c5be7633e8
+  devices_attached: 0
+  feature_templates:
+  - name: C8K_AAA_Global
+    type: cedge_aaa
+  - name: C8K_BFD_Global
+    type: cisco_bfd
+  - name: C8K_OMP_Global
+    type: cisco_omp
+  - name: C8K_Sec_Global
+    type: cisco_security
+  - name: C8K_Sys_Global
+    type: cisco_system
+    sub_templates:
+    - name: C8K_Log_Global
+      type: cisco_logging
+    - name: C8K_NTP_Global
+      type: cisco_ntp
+  - name: C8K_VPN0_BNK
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN0_IF_BNK
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF2_BNK
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF3_BNK
+      type: cisco_vpn_interface
+  - name: Default_AWS_TGW_CSR_VPN512_V01
+    type: cisco_vpn
+  - name: Default_EQUINIX_C8000V_GLOBAL_CISCO_V01
+    type: cedge_global
+  - name: Factory_Default_Retail_Banner
+    type: cisco_banner
+  - name: C8K_CLI_Global
+    type: cli-template
+- name: vSmart_default
+  description: vSmart_default
+  device_type: vsmart
+  template_id: 3250bc8d-ee7d-4721-9697-aea7a966af35
+  devices_attached: 0
+  feature_templates:
+  - name: Factory_Default_AAA_Template
+    type: aaa
+  - name: vSmart_OMP_Global
+    type: omp-vsmart
+  - name: vSmart_Security_Global
+    type: security-vsmart
+  - name: vSmart_Sys_Global
+    type: system-vsmart
+    sub_templates:
+    - name: Factory_Default_Logging_Template_V01
+      type: logging
+    - name: vSmart_NTP_Global
+      type: ntp
+  - name: vSmart_VPN0_Global
+    type: vpn-vsmart
+    sub_templates:
+    - name: vSmart_VPN0_IF_Global
+      type: vpn-vsmart-interface
+  - name: Factory_Default_vSmart_vManage_VPN_512_Template
+    type: vpn-vsmart
+- name: HJ_default
+  description: HJ_default
+  device_type: vedge-C8000V
+  template_id: ca4b2330-dc96-418b-bbf5-bee9335f92ac
+  devices_attached: 0
+  feature_templates:
+  - name: C8K_AAA_Global
+    type: cedge_aaa
+  - name: C8K_BFD_Global
+    type: cisco_bfd
+  - name: C8K_OMP_Global
+    type: cisco_omp
+  - name: C8K_Sec_Global
+    type: cisco_security
+  - name: C8K_Sys_Global
+    type: cisco_system
+    sub_templates:
+    - name: C8K_Log_Global
+      type: cisco_logging
+    - name: C8K_NTP_Global
+      type: cisco_ntp
+  - name: C8K_VPN0_HJ
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN0_IF_HJ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF2_HJ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF3_HJ
+      type: cisco_vpn_interface
+  - name: C8K_VPN512_Global
+    type: cisco_vpn
+  - name: C8K_VPN1_HJ
+    type: cisco_vpn
+  - name: Default_EQUINIX_C8000V_GLOBAL_CISCO_V01
+    type: cedge_global
+  - name: Factory_Default_Retail_Banner
+    type: cisco_banner
+  - name: C8K_CLI_HJ
+    type: cli-template
+- name: HQ_default
+  description: HQ_default
+  device_type: vedge-C8000V
+  template_id: 27ee7dfc-d3b2-4dfe-bf72-aa63eb9bdc1c
+  devices_attached: 0
+  feature_templates:
+  - name: C8K_AAA_Global
+    type: cedge_aaa
+  - name: C8K_BFD_Global
+    type: cisco_bfd
+  - name: C8K_OMP_Global
+    type: cisco_omp
+  - name: C8K_Sec_Global
+    type: cisco_security
+  - name: C8K_Sys_Global
+    type: cisco_system
+    sub_templates:
+    - name: C8K_Log_Global
+      type: cisco_logging
+    - name: C8K_NTP_Global
+      type: cisco_ntp
+  - name: C8K_VPN0_HQ
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN0_IF_HQ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF2_HQ
+      type: cisco_vpn_interface
+    - name: C8K_VPN0_IF3_HQ
+      type: cisco_vpn_interface
+  - name: C8K_VPN512_Global
+    type: cisco_vpn
+  - name: C8K_VPN1_HQ
+    type: cisco_vpn
+  - name: Default_EQUINIX_C8000V_GLOBAL_CISCO_V01
+    type: cedge_global
+  - name: Factory_Default_Retail_Banner
+    type: cisco_banner
+  - name: C8K_CLI_HQ
+    type: cli-template
+- name: WDC
+  description: WDC
+  device_type: vedge-C8000V
+  template_id: d473f434-8bd3-4270-a6e2-b138f957a6f2
+  devices_attached: 1
+  feature_templates:
+  - name: C8K_AAA_Global
+    type: cedge_aaa
+  - name: C8K_BFD_Global
+    type: cisco_bfd
+  - name: C8K_OMP_Global
+    type: cisco_omp
+  - name: C8K_Sec_Global
+    type: cisco_security
+  - name: C8K_Sys_Global
+    type: cisco_system
+    sub_templates:
+    - name: C8K_Log_Global
+      type: cisco_logging
+    - name: C8K_NTP_Global
+      type: cisco_ntp
+  - name: C8K_VPN0_WDC
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN0_IF_WDC
+      type: cisco_vpn_interface
+  - name: C8K_VPN512_Global
+    type: cisco_vpn
+  - name: C8K_VPN1_WDC
+    type: cisco_vpn
+    sub_templates:
+    - name: C8K_VPN1_IF1_WDC
+      type: cisco_vpn_interface
+  - name: C8K_Global
+    type: cedge_global
+  - name: Factory_Default_Retail_Banner
+    type: cisco_banner
