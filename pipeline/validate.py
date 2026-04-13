@@ -72,8 +72,11 @@ def validate_cross_references(config_dir: Path) -> list[str]:
 
     all_data: list[dict] = []
     for yaml_file in config_dir.rglob("*.yaml"):
-        with open(yaml_file) as f:
-            data = yaml.safe_load(f) or {}
+        try:
+            with open(yaml_file) as f:
+                data = yaml.safe_load(f) or {}
+        except yaml.YAMLError:
+            continue
         all_data.append(data)
 
         for ft in data.get("feature_templates", []):
