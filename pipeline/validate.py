@@ -70,15 +70,20 @@ def validate_cross_references(config_dir: Path) -> list[str]:
     feature_template_names: set[str] = set()
     device_template_names: set[str] = set()
 
+    all_data: list[dict] = []
     for yaml_file in config_dir.rglob("*.yaml"):
         with open(yaml_file) as f:
             data = yaml.safe_load(f) or {}
+        all_data.append(data)
 
         for ft in data.get("feature_templates", []):
             feature_template_names.add(ft["name"])
 
         for dt in data.get("device_templates", []):
             device_template_names.add(dt["name"])
+
+    for data in all_data:
+        for dt in data.get("device_templates", []):
             for ref in dt.get("feature_templates", []):
                 if ref not in feature_template_names:
                     errors.append(f"Device template '{dt['name']}' references undefined feature template '{ref}'")
